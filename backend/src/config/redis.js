@@ -1,0 +1,15 @@
+const redis = require('redis');
+
+const client = redis.createClient({ 
+  url: process.env.REDIS_URL || 'redis://localhost:6379',
+  socket: {
+    // If Redis is unavailable in local env, fail fast instead of retry-loop.
+    reconnectStrategy: false
+  }
+}); 
+
+client.on('error', (err) => console.log('Redis Client Error', err));
+
+client.on('ready', () => console.log('Redis Client Ready'));
+
+module.exports = client;
