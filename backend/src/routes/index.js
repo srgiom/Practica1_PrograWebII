@@ -6,20 +6,12 @@ const productRoutes = require('./productRoutes');
 const cartRoutes = require('./cartRoutes');
 const userRoutes = require('./userRoutes');
 
-router.use('/', authRoutes); // /api/login, /api/register are at root of api in original
-// Wait, original was /api/login. So if I mount this at /api, it becomes /api/login.
-// But wait, the original routes.js had /api/login directly.
-// In app.js I will likely mount this router at /api.
-// So authRoutes should be just /login and /register.
+router.use('/', authRoutes);
 
 router.use('/productos', productRoutes);
 router.use('/cart', cartRoutes);
 router.use('/users', userRoutes);
 
-// SEO Route (Sitemap) - keeping it here or moving to a controller?
-// For simplicity, let's keep it here or create a SeoController.
-// Let's keep it simple and inline it or move to utils if needed.
-// Actually, let's just add it here for now to match functionality.
 const Producto = require('../models/Producto');
 router.get('/sitemap.xml', async (req, res) => {
   try {
