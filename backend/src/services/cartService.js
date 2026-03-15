@@ -17,11 +17,6 @@ class CartService {
     }
 
     await user.save();
-    // Populate manually or re-fetch if needed, but here we return the cart
-    // Note: In the original code it populated before returning.
-    // We can do that here too.
-    // However, populate on a document instance works differently than query.
-    // Mongoose 6+ supports await user.populate(...)
     await user.populate('cart.productId');
     return user.cart;
   }
