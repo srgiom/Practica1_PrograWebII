@@ -5,10 +5,9 @@ const authJWT = require('../middleware/authMiddleware');
 const multer = require('multer');
 const path = require('path');
 
-// Multer config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../../uploads')); // Adjust path to root uploads
+    cb(null, path.join(__dirname, '../../uploads'));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
